@@ -1,6 +1,9 @@
 'use client'
+// TicTacToeGame.tsx
 import React, { useState } from 'react';
 import Board from './board';
+import ResetButton from './button';
+import { calcularGanador } from './calculatewinner';
 
 const TicTacToeGame: React.FC = () => {
     const [rejillas, setRejillas] = useState<Array<Array<string | null>>>([Array(9).fill(null)]);
@@ -44,28 +47,9 @@ const TicTacToeGame: React.FC = () => {
                 <div>{estado}</div>
             </div>
 
-            <div className='btn'>
-                <button className='text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2' onClick={() => reiniciarJuego()}>Reiniciar juego</button>
-            </div>
+            <ResetButton onClick={reiniciarJuego} />
         </div>
     );
-};
-
-const calcularGanador = (rejillas: Array<string | null>): Array<number> | null => {
-    const lineasGanadoras = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
-    ];
-
-    for (const line of lineasGanadoras) {
-        const [a, b, c] = line;
-        if (rejillas[a] && rejillas[a] === rejillas[b] && rejillas[a] === rejillas[c]) {
-            return line;
-        }
-    }
-
-    return null;
 };
 
 export default TicTacToeGame;
