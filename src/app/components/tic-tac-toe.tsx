@@ -1,5 +1,4 @@
 'use client'
-// TicTacToeGame.tsx
 import React, { useState } from 'react';
 import Board from './board';
 import ResetButton from './button';
